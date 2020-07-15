@@ -1,0 +1,11 @@
+# ignore all files
+*
+
+# track these files
+!.gitignore
+!.vimrc
+
+# here I just want the coc-settings.json to be the only file tracked by Git inside .vim directory.
+!.vim/
+.vim/*
+!.vim/coc-settings.json
