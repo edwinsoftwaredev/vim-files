@@ -1,0 +1,8 @@
+{
+    "eslint.filetypes":["javascript","javascritpreact","typescript"],
+    "coc.preferences.hoverTarget": "float",
+    "suggest.maxPreviewWidth":100,
+    "suggest.labelMaxLength":50,
+    "suggest.detailField":"preview",
+    "coc.source.OmniSharp.filetypes":["cs"]
+}
