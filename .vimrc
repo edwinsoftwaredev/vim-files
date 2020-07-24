@@ -105,12 +105,12 @@ set completeopt-=preview
 " to move upwards use: CTRL-Y
 " to move downwards use: CTRL-E
 let g:OmniSharp_popup_options = {
-    \ 'maxwidth': 115,
-    \ 'minwidth': 115,
-    \ 'minheight': 15,
-    \ 'maxheight': 15,
-    \ 'padding': [0, 1, 0, 1]
-    \}
+      \ 'maxwidth': 115,
+      \ 'minwidth': 115,
+      \ 'minheight': 15,
+      \ 'maxheight': 15,
+      \ 'padding': [0, 1, 0, 1]
+      \}
 
 let g:NERDTreeWinSize = 45
 
@@ -149,15 +149,15 @@ nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
 nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
 
 function! s:check_back_space() abort
- let col = col('.') - 1
- return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Conf 1
 inoremap <silent><expr> <TAB>
-         \ pumvisible() ? "\<C-n>" :
-         \ <SID>check_back_space() ? "\<TAB>" :
-         \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" :"\<C-h>"
 inoremap <silent><expr> <C-space> coc#refresh()
@@ -175,13 +175,47 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 
+nnoremap <expr> <c-d> Scroll_cursor_popup_ext(1) ? '<esc>' : '<c-d>'
+nnoremap <expr> <c-u> Scroll_cursor_popup_ext(0) ? '<esc>' : '<c-u>'
+
+function Find_cursor_popup_ext(...)
+  let radius = get(a:000, 0, 2)
+  let srow = screenrow()
+  let scol = screencol()
+
+  " it's necessary to test entire rect, as some popup might be quite
+  " small
+  for r in range(srow - radius, srow + radius)
+    for c in range(scol - radius, scol + radius)
+      let winid = popup_locate(r, c)
+      if winid != 0
+        return winid
+      endif
+    endfor
+  endfor
+
+  return 0
+endfunction
+
+function Scroll_cursor_popup_ext(down)
+  let winid = Find_cursor_popup_ext()
+  if winid == 0
+    return 0
+  endif
+
+  let pp = popup_getpos(winid)
+
+  call popup_setoptions(winid, {'firstline' : pp.firstline +  (a:down ? 1 : -1)})
+  return 1
+endfunction
+
 nnoremap <silent><leader>dv :call <SID>show_coc_docs()<CR>
 fun! s:show_coc_docs()
- if &filetype == 'vim'
-  execute 'h '.expand('<cword>')
- else
-  call CocAction('doHover')
- endif
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 " Sweet Sweet FuGITive
@@ -193,37 +227,37 @@ map <C-n> :NERDTreeToggle<CR>
 
 " OmniSharp mappings *********************************************************
 augroup omnisharp_commands
-    autocmd!
-    " show type information automatically when the cursor stops moving.
-    " Note that type is echoed to the Vim command  line, and will overwrite
-    " any other messages in this space including e.g ALE linting messages
+  autocmd!
+  " show type information automatically when the cursor stops moving.
+  " Note that type is echoed to the Vim command  line, and will overwrite
+  " any other messages in this space including e.g ALE linting messages
 
-    " I commented this. To lookup the type I have to use the mappings
-    " autocmd CursorHold *.cs OmniSharpTypeLookup
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+  " I commented this. To lookup the type I have to use the mappings
+  " autocmd CursorHold *.cs OmniSharpTypeLookup
+  autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
-    " the following commands are contextual, based on the cursor position
-    autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+  " the following commands are contextual, based on the cursor position
+  autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+  autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+  autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+  autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
 
-    " Finds members in the current buffer
-    autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
+  " Finds members in the current buffer
+  autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
 
-    autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>dv :OmniSharpDocumentation<CR>
-    autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-    autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+  autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
+  autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
+  autocmd FileType cs nnoremap <buffer> <Leader>dv :OmniSharpDocumentation<CR>
+  autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
+  autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
 
-    " navigate up and down by method/property/field
-    autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-    autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
+  " navigate up and down by method/property/field
+  autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
+  autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
 
-    " Find all code errors/warnings for the current solution and populate the
-    " quickfix window
-    autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
+  " Find all code errors/warnings for the current solution and populate the
+  " quickfix window
+  autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
 augroup END
 
 " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
@@ -245,9 +279,9 @@ nnoremap <Leader>sp :OmniSharpStopServer<CR>
 "******************************************************************************
 
 fun! TrimWhitespace()
- let l:save = winsaveview()
- keeppatterns %s/\s\+$//e
- call winrestview(l:save)
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
