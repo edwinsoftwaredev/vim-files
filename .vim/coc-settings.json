@@ -1,8 +1,17 @@
 {
-    "eslint.filetypes":["javascript","javascritpreact","typescript"],
-    "coc.preferences.hoverTarget": "float",
-    "suggest.maxPreviewWidth":100,
-    "suggest.labelMaxLength":50,
-    "suggest.detailField":"preview",
-    "coc.source.OmniSharp.filetypes":["cs"]
+  "eslint.filetypes":["javascript","javascritpreact","typescript", "typescriptreact"],
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.hoverTarget": "float",
+  "suggest.maxPreviewWidth":100,
+  "suggest.labelMaxLength":50,
+  "suggest.detailField":"preview",
+  "coc.source.OmniSharp.filetypes":["cs"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tsserver.formatOnType": true,
+  "coc.preferences.formatOnType": true
 }

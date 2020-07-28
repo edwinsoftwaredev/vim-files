@@ -47,6 +47,11 @@ call plug#begin('~/.vim/plugged') " <-- user directory on Windows
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -60,11 +65,12 @@ Plug 'w0rp/ale'
 " I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
 " Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes' " <-- give it a try later
+Plug 'vim-airline/vim-airline-themes' " <-- give it a try later
 Plug 'flazz/vim-colorschemes'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -79,6 +85,8 @@ let g:gruvbox_contrast_dark = 'hard'
 " this enable powerline fonts symbols like the arrows for the powerline
 let g:airline_powerline_fonts = 1
 
+let g:airline_theme='deus'
+
 " adding to vim-airline's tabline
 let g:webdevicons_enable_airline_tabline = 1
 
@@ -86,6 +94,8 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
 let g:coc_node_path = '/usr/local/bin/node'
+
+let g:polyglot_disabled = ['typescript', 'ts', 'tsx', 'typescriptreact']
 
 " OmniSharp settings
 let g:OmniSharp_server_stdio=1
@@ -114,8 +124,82 @@ let g:OmniSharp_popup_options = {
 
 let g:NERDTreeWinSize = 45
 
-colorscheme gruvbox
-set background=dark
+" colorscheme gruvbox
+colorscheme onedark
+" set background=dark
+
+highlight Normal guibg=#21242a
+highlight MatchParen guifg=#C678DD guibg=#504066
+highlight LineNr    guifg=#57607a
+highlight CursorLineNr guifg=#56B6C2
+highlight Error guifg=#f57373 guibg=#804040
+highlight vimError guifg=#f57373 guibg=#804040
+
+hi IndentGuidesEven guibg=#21242a guifg=#1f1f28
+hi IndentGuidesOdd guibg=#262a36 guifg=#1f1f28
+hi Comment cterm=italic guifg=#4a5158
+hi String guifg=#98C379 guibg=#2a2e34
+
+""" browns
+" function params: numbers and constants
+hi Statement guifg=#907161
+hi Conditional guifg=#907161
+hi Keyword guifg=#56B6C2
+hi Function guifg=#56B6C2
+
+" Yellows
+hi Number guifg=#E5C07B
+hi Special guifg=#E5C07B
+hi Boolean guifg=#E5C07B
+
+" purple
+hi CtrlPMatch guifg=#ba9ef7
+hi Visual guibg=#364652
+
+" medium red: if else operators
+hi Preproc guifg=#e86868
+hi Type guifg=#e86868
+
+"""""" vim-jsx ONLY
+hi Identifier cterm=italic
+
+" Blues
+" light blues
+hi xmlTagName guifg=#59ACE5
+hi xmlTag guifg=#59ACE5
+
+" dark blues
+hi xmlEndTag guifg=#2974a1
+hi jsxCloseString guifg=#2974a1
+hi htmlTag guifg=#2974a1
+hi htmlEndTag guifg=#2974a1
+hi htmlTagName guifg=#59ACE5
+hi jsxAttrib guifg=#1BD1C1
+
+" cyan
+hi Constant guifg=#56B6C2
+hi typescriptBraces guifg=#56B6C2
+hi typescriptEndColons guifg=#56B6C2
+hi typescriptRef guifg=#56B6C2
+hi typescriptPropietaryMethods guifg=#56B6C2
+hi typescriptEventListenerMethods guifg=#56B6C2
+hi typescriptFunction guifg=#56B6C2
+hi typescriptVars guifg=#56B6C2
+hi typescriptParen guifg=#56B6C2
+hi typescriptDotNotation guifg=#56B6C2
+hi typescriptBracket guifg=#56B6C2
+hi typescriptBlock guifg=#56B6C2
+hi typescriptJFunctions guifg=#56B6C2
+hi typescriptSFunctions guifg=#56B6C2
+hi typescriptInterpolationDelimiter guifg=#56B6C2
+hi typescriptIdentifier guifg=#907161 cterm=italic
+
+" javascript
+hi jsParens guifg=#56B6C2
+hi jsObjectBraces guifg=#C678DD
+hi jsFuncBraces guifg=#56B6C2
+hi jsObjectFuncName guifg=#D19A66
+hi jsObjectKey guifg=#56B6C2
 
 "if executable('rg')
 " let g:rg_derive_root='true'
