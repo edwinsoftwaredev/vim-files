@@ -142,10 +142,10 @@ hi String guifg=#98C379 guibg=#2a2e34
 
 """ browns
 " function params: numbers and constants
-hi Statement guifg=#907161
-hi Conditional guifg=#907161
+" hi Statement guifg=#907161
+" hi Conditional guifg=#907161
 hi Keyword guifg=#56B6C2
-hi Function guifg=#56B6C2
+hi Function guifg=#66d1de
 
 " Yellows
 hi Number guifg=#E5C07B
