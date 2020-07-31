@@ -45,23 +45,24 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 "
 call plug#begin('~/.vim/plugged') " <-- user directory on Windows
 
+
+"" Plug 'sheerun/vim-polyglot' " <-- incompatible with some plugins installed
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
-Plug 'maxmellon/vim-jsx-pretty'
+"" Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'omnisharp/omnisharp-vim'
-Plug 'sheerun/vim-polyglot'
+Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'vim-utils/vim-man'
 Plug 'scrooloose/nerdtree'
 Plug 'nickspoons/vim-sharpenup'
-Plug 'w0rp/ale'
 
 " I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
@@ -96,7 +97,7 @@ let g:webdevicons_enable_airline_statusline = 1
 
 let g:coc_node_path = '/usr/local/bin/node'
 
-let g:polyglot_disabled = ['typescript', 'ts', 'tsx', 'typescriptreact']
+" let g:polyglot_disabled = ['typescript', 'ts', 'tsx', 'typescriptreact', 'javascript', 'jsx', 'javascriptreact']
 
 " OmniSharp settings
 let g:OmniSharp_server_stdio=1
@@ -104,7 +105,16 @@ let g:OmniSharp_server_path='/mnt/c/OmniSharp/omnisharp-roslyn/artifacts/publish
 let g:OmniSharp_translate_cygwin_wsl=1
 let g:omnicomplete_fetch_full_documentation=1
 let g:OmniSharp_selector_ui='fzf'
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+
 let g:ale_linters={'cs': ['OmniSharp']}
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+let g:ale_sign_info = '·'
+let g:ale_sign_style_error = '·'
+let g:ale_sign_style_warning = '·'
+
 let g:OmniSharp_highlighting=2
 "let g:OmniSharp_typeLookupInPreview=1
 "set completeopt=longest,menuone,preview
