@@ -45,15 +45,10 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 "
 call plug#begin('~/.vim/plugged') " <-- user directory on Windows
 
-
-"" Plug 'sheerun/vim-polyglot' " <-- incompatible with some plugins installed
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-"" Plug 'peitalin/vim-jsx-typescript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'alvan/vim-closetag'
 Plug 'jparise/vim-graphql'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
@@ -84,20 +79,27 @@ call plug#end()            " required
 
 " gruvbox theme constrast
 let g:gruvbox_contrast_dark = 'hard'
+
 " this enable powerline fonts symbols like the arrows for the powerline
 let g:airline_powerline_fonts = 1
-
 let g:airline_theme='deus'
-
 " adding to vim-airline's tabline
 let g:webdevicons_enable_airline_tabline = 1
-
 " adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
 
 let g:coc_node_path = '/usr/local/bin/node'
 
-" let g:polyglot_disabled = ['typescript', 'ts', 'tsx', 'typescriptreact', 'javascript', 'jsx', 'javascriptreact']
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,phtml,jsx,tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+let g:closetag_shortcut = '>'
 
 " OmniSharp settings
 let g:OmniSharp_server_stdio=1
@@ -116,10 +118,6 @@ let g:ale_sign_style_error = '·'
 let g:ale_sign_style_warning = '·'
 
 let g:OmniSharp_highlighting=2
-"let g:OmniSharp_typeLookupInPreview=1
-"set completeopt=longest,menuone,preview
-"set completepopup=highlight:Pmenu,border:off "not recognize by neovim
-"set splitbelow
 let g:syntastic_cs_checkers = ['code_checker']
 set completeopt-=preview
 
