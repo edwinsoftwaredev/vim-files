@@ -24,6 +24,7 @@ set undofile
 set scrolloff=8
 set termguicolors
 set showcmd
+set cursorline
 
 autocmd FileType cs setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
@@ -48,8 +49,8 @@ call plug#begin('~/.vim/plugged') " <-- user directory on Windows
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
+Plug 'raimondi/delimitmate'
 Plug 'alvan/vim-closetag'
-Plug 'jparise/vim-graphql'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -62,6 +63,9 @@ Plug 'nickspoons/vim-sharpenup'
 " I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 "  TOOOOOOOOOOOOO
 " Plug 'morhetz/gruvbox'
+Plug 'jacoborus/tender.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -78,11 +82,11 @@ call plug#end()            " required
 " ********************************************************************
 
 " gruvbox theme constrast
-let g:gruvbox_contrast_dark = 'hard'
+let g:nord_cursor_line_number_background = 1
 
 " this enable powerline fonts symbols like the arrows for the powerline
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='deus'
+"  let g:airline_theme='base16'
 " adding to vim-airline's tabline
 let g:webdevicons_enable_airline_tabline = 1
 " adding to vim-airline's statusline
@@ -133,8 +137,10 @@ let g:OmniSharp_popup_options = {
 
 let g:NERDTreeWinSize = 45
 
-colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme tender
 set background=dark
+highlight CursorLine ctermbg=NONE guibg=NONE
 
 let loaded_matchparen = 1
 let mapleader = " "
