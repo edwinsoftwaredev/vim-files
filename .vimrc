@@ -25,6 +25,7 @@ set scrolloff=8
 set termguicolors
 set showcmd
 set cursorline
+set statusline^=%{coc#status()}
 
 autocmd FileType cs setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
@@ -114,7 +115,8 @@ let g:OmniSharp_selector_ui='fzf'
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 
-let g:ale_linters={'cs': ['OmniSharp']}
+let g:ale_linters={'cs': ['OmniSharp'], 'python': ['flake8', 'pylint']}
+" let g:ale_linters={'cs': ['OmniSharp']}
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
 let g:ale_sign_info = '·'
@@ -138,7 +140,7 @@ let g:OmniSharp_popup_options = {
 let g:NERDTreeWinSize = 45
 
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme tender
+colorscheme gruvbox
 set background=dark
 highlight CursorLine ctermbg=NONE guibg=NONE
 

@@ -6,6 +6,7 @@
   "suggest.labelMaxLength":50,
   "suggest.detailField":"preview",
   "coc.source.OmniSharp.filetypes":["cs"],
+  "python.jediEnabled": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "javascriptreact",
